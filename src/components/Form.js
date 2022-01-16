@@ -76,7 +76,7 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
           autoFocus
         ></input>
       </form>
-      <p>
+      <p className="header">
         Errors: <span id="error-amount">{errors}</span>
       </p>
     </div>
