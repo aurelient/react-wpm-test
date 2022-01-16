@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Form({ wordsTyped, incrementWordsTyped, wordsList }) {
+function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
   /* Props:
   wordsList: List of words user has to type
   incrementWordsTyped: Function which increments wordsTyped by 1
@@ -14,17 +14,33 @@ function Form({ wordsTyped, incrementWordsTyped, wordsList }) {
   */
 
   const [input, setInput] = useState("");
+  const [errors, setErrors] = useState(0);
+  const [errorFlag, setErrorFlag] = useState(false);
   const [wordToType, setWordToType] = useState(wordsList[wordsTyped]);
   const [wordsBefore, setWordsBefore] = useState("");
   const [wordsAfter, setWordsAfter] = useState("");
 
   useEffect(() => {
-    if (input === wordToType) {
+    const typedText = input.toLowerCase().replace(/\s+/g, "");
+    if (!wordToType.includes(typedText) && !errorFlag) {
+      setErrors(errors + 1);
+      incrementErrors();
+      setErrorFlag(true);
+    }
+    if (typedText === wordToType) {
       console.log("Word typed correctly!");
       incrementWordsTyped();
       setInput("");
+      setErrorFlag(false);
     }
-  }, [input, wordToType, incrementWordsTyped]);
+  }, [
+    input,
+    errors,
+    errorFlag,
+    wordToType,
+    incrementErrors,
+    incrementWordsTyped,
+  ]);
 
   useEffect(() => {
     // Input is cleared when typing test begins
@@ -50,14 +66,17 @@ function Form({ wordsTyped, incrementWordsTyped, wordsList }) {
         <span className="word-to-type">{wordToType}</span>{" "}
         <span className="words-after">{wordsAfter}</span>
       </h3>
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           autoFocus
         ></input>
       </form>
+      <p>
+        Errors: <span id="error-amount">{errors}</span>
+      </p>
     </div>
   );
 }

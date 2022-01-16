@@ -1,9 +1,8 @@
-# Max's React Typing Speed WPM Test
+# Fork from Max's React Typing Speed WPM Test
+
+Original link: https://maximo-react-wpm-test.netlify.com
 
 ## How to use
-
-[Click here](https://maximo-react-wpm-test.netlify.com), read the instructions, and click start to begin.  
-Official link: https://maximo-react-wpm-test.netlify.com
 
 ## Basic component structure
 
