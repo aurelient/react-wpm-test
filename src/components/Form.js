@@ -21,6 +21,7 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
   const [wordsAfter, setWordsAfter] = useState("");
 
   useEffect(() => {
+    console.log("typedText effect");
     const typedText = input.toLowerCase().replace(/\s+/g, "");
     if (!wordToType.includes(typedText) && !errorFlag) {
       setErrors(errors + 1);
@@ -44,9 +45,10 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
 
   useEffect(() => {
     // Input is cleared when typing test begins
-    if (wordsTyped === 0) {
-      setInput("");
-    }
+    console.log("wordTyped effect");
+    // if (wordsTyped === 0) {
+    setInput("");
+    // }
     // Set current word to type based on user's progress
     setWordToType(wordsList[wordsTyped]);
     /* Combine list of words before current word to type into one string. Same
