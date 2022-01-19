@@ -7,7 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20vh;
+  margin-top: 5vh;
 }
 .App h1,
 .App div {
@@ -61,7 +61,7 @@ body {
 }
 
 .Form .words-container {
-  max-height: 20vh;
+  max-height: 30vh;
   max-width: 70vw;
   overflow: hidden;
 }
