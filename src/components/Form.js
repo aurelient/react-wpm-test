@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
+function Form({
+  wordsList,
+  wordsTyped,
+  incrementErrors,
+  incrementWordsTyped,
+  incrementKeystrokes,
+}) {
   /* Props:
   wordsList: List of words user has to type
   incrementWordsTyped: Function which increments wordsTyped by 1
@@ -21,17 +27,19 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
   const [wordsAfter, setWordsAfter] = useState("");
 
   useEffect(() => {
-    console.log("typedText effect");
     const typedText = input.toLowerCase().replace(/\s+/g, "");
-    if (!wordToType.includes(typedText) && !errorFlag) {
+    const wordToCheck = wordToType.toLowerCase().replace(/\s+/g, "");
+    console.log("typedText effect " + typedText + " " + wordToType);
+    if (!wordToCheck.includes(typedText) && !errorFlag) {
       setErrors(errors + 1);
       incrementErrors();
       setErrorFlag(true);
     }
-    if (typedText === wordToType) {
+    if (typedText === wordToCheck) {
       console.log("Word typed correctly!");
       incrementWordsTyped();
       setInput("");
+      incrementKeystrokes(wordToCheck.length);
       setErrorFlag(false);
     }
   }, [
@@ -41,11 +49,11 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
     wordToType,
     incrementErrors,
     incrementWordsTyped,
+    incrementKeystrokes,
   ]);
 
   useEffect(() => {
     // Input is cleared when typing test begins
-    console.log("wordTyped effect");
     // if (wordsTyped === 0) {
     setInput("");
     // }
@@ -65,6 +73,7 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
     <div className="Form">
       <h3 className="words-container">
         <span className="words-before">{wordsBefore}</span>{" "}
+        {/* <span className={`word-to-type ${errorFlag ? "green" : "red"}`}> */}
         <span className="word-to-type">{wordToType}</span>{" "}
         <span className="words-after">{wordsAfter}</span>
       </h3>
@@ -77,7 +86,7 @@ function Form({ wordsTyped, incrementErrors, incrementWordsTyped, wordsList }) {
         ></input>
       </form>
       <p className="header">
-        Errors: <span id="error-amount">{errors}</span>
+        Words typed: {wordsTyped} — Errors: {errors}
       </p>
     </div>
   );

@@ -2,6 +2,8 @@ $dark-sea: #485167;
 $light-sea: #8892ac;
 $gray: #d7dbe3;
 $white: #f3f4f7;
+$red: #c00101;
+$green: #09c031;
 
 body {
   background-color: $dark-sea;
@@ -72,13 +74,19 @@ body {
 
 .Form {
   .words-container {
-    max-height: 50vh;
+    max-height: 20vh;
     max-width: 70vw;
     overflow: hidden;
   }
 
   .word-to-type {
     color: $white;
+    .green {
+      background-color: greenyellow;
+    }
+    .red {
+      background-color: orangered;
+    }
   }
 
   .words-before,
