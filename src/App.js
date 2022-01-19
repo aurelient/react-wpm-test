@@ -97,6 +97,7 @@ function App() {
     setWordsList(wordsListToSet);
     setTime(TEST_TIME);
     setWordsTyped(0);
+    setKeystrokes(0);
     setErrors(0);
     setTestLoading(false);
   }
