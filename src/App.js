@@ -4,6 +4,7 @@ import "./styles/App.css";
 import Timer from "./components/Timer";
 import StartButton from "./components/Start-Button";
 import Form from "./components/Form";
+import Logs from "./components/Logs";
 
 const TEST_TIME = 30;
 
@@ -19,9 +20,9 @@ function App() {
   const [time, setTime] = useState(0);
   const [wordsList, setWordsList] = useState(["test", "hello"]);
   const [wordsTyped, setWordsTyped] = useState(0);
+  const [trial, setTrial] = useState(0);
   const [errors, setErrors] = useState(0);
   const [keystrokes, setKeystrokes] = useState(0);
-  const [trialID, setTrialID] = useState(0);
   const [testActive, setTestActive] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
   const textes = [
@@ -99,19 +100,6 @@ function App() {
     setKeystrokes(0);
     setErrors(0);
     setTestLoading(false);
-    if (trialID !== 0) {
-      let trialdata = wordsTyped;
-      // "" +
-      // Math.round(keystrokes / 5) +
-      // ", " +
-      // wordsTyped +
-      // ", " +
-      // keystrokes +
-      // ", " +
-      // errors;
-      window.localStorage.setItem("trial-" + trialID, trialdata);
-      setTrialID(trialID + 1);
-    }
   }
 
   function incrementWordsTyped() {
@@ -143,23 +131,31 @@ function App() {
     return () => clearInterval(timeInterval);
   }, [time]);
 
-  // // Logic for logging data
-  // useEffect(() => {
-  //   if (testActive) {
-  //   } else {
-  //     let trialdata = wordsTyped;
-  //     // "" +
-  //     // Math.round(keystrokes / 5) +
-  //     // ", " +
-  //     // wordsTyped +
-  //     // ", " +
-  //     // keystrokes +
-  //     // ", " +
-  //     // errors;
-  //     // window.localStorage.setItem("trial-" + trialID, trialdata);
-  //     // setTrialID(trialID + 1);
-  //   }
-  // }, [trialID, wordsTyped, testActive]);
+  // Logic for logging to local storage after each trial
+  useEffect(() => {
+    if (!testActive && keystrokes !== 0) {
+      console.log("storage");
+      const trialID = window.localStorage.getItem("trialID");
+      if (trialID != null) {
+        let trialdata =
+          trialID +
+          ", " +
+          Math.round((keystrokes * 2) / 5) +
+          ", " +
+          wordsTyped +
+          ", " +
+          keystrokes +
+          ", " +
+          errors;
+        window.localStorage.setItem("trial-" + trialID, trialdata);
+        window.localStorage.setItem("trialID", parseInt(trialID) + 1);
+        setTrial(trialID);
+      } else {
+        window.localStorage.setItem("trialID", 0);
+        setTrial(0);
+      }
+    }
+  }, [errors, keystrokes, testActive, wordsTyped]);
 
   if (testActive) {
     return (
@@ -183,6 +179,15 @@ function App() {
   } else {
     return (
       <div className="App">
+        <button
+          className="logs"
+          onClick={function () {
+            window.localStorage.clear();
+            window.localStorage.setItem("trialID", 0);
+          }}
+        >
+          Clear logs
+        </button>
         <h1 className="header">Welcome to my typing speed app!</h1>
         {/* <div className="header">Rules:</div> */}
         <ul className="header">
@@ -197,6 +202,10 @@ function App() {
           typed {wordsTyped} words, and {keystrokes} keystrokes, with {errors}{" "}
           errors in 30 seconds.
         </div>
+        <div className="header">
+          <Logs />
+        </div>
+        <small style={{ color: "#aaa" }}>#{trial}</small>
       </div>
     );
   }

@@ -52,6 +52,22 @@ body {
   }
 }
 
+button.logs {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: $light-sea;
+  border: 1px solid $gray;
+  color: $white;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+  padding: 0.1em 0.2em;
+}
+button.logs:hover {
+  cursor: pointer;
+  background-color: $gray;
+}
+
 .Start-Button {
   button {
     background-color: $light-sea;

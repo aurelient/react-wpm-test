@@ -43,6 +43,23 @@ body {
     transform: rotate(360deg);
   }
 }
+button.logs {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #8892ac;
+  border: 1px solid #d7dbe3;
+  color: #f3f4f7;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+  padding: 0.1em 0.2em;
+}
+
+button.logs:hover {
+  cursor: pointer;
+  background-color: #d7dbe3;
+}
+
 .Start-Button button {
   background-color: #8892ac;
   border: 2px solid #d7dbe3;
