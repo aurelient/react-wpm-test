@@ -21,7 +21,7 @@ function App() {
   const [wordsTyped, setWordsTyped] = useState(0);
   const [errors, setErrors] = useState(0);
   const [keystrokes, setKeystrokes] = useState(0);
-  // const [trialID, setTrialID] = useState(0);
+  const [trialID, setTrialID] = useState(0);
   const [testActive, setTestActive] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
   const textes = [
@@ -99,6 +99,19 @@ function App() {
     setKeystrokes(0);
     setErrors(0);
     setTestLoading(false);
+    if (trialID !== 0) {
+      let trialdata = wordsTyped;
+      // "" +
+      // Math.round(keystrokes / 5) +
+      // ", " +
+      // wordsTyped +
+      // ", " +
+      // keystrokes +
+      // ", " +
+      // errors;
+      window.localStorage.setItem("trial-" + trialID, trialdata);
+      setTrialID(trialID + 1);
+    }
   }
 
   function incrementWordsTyped() {
