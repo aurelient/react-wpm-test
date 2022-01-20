@@ -183,6 +183,7 @@ function App() {
           className="logs"
           onClick={function () {
             window.localStorage.clear();
+            setTrial(0);
             window.localStorage.setItem("trialID", 0);
           }}
         >
