@@ -29,14 +29,12 @@ function Form({
   useEffect(() => {
     const typedText = input.toLowerCase().replace(/\s+/g, "");
     const wordToCheck = wordToType.toLowerCase().replace(/\s+/g, "");
-    console.log("typedText effect " + typedText + " " + wordToType);
     if (!wordToCheck.includes(typedText) && !errorFlag) {
       setErrors(errors + 1);
       incrementErrors();
       setErrorFlag(true);
     }
     if (typedText === wordToCheck) {
-      console.log("Word typed correctly!");
       incrementWordsTyped();
       setInput("");
       incrementKeystrokes(wordToCheck.length);
@@ -46,7 +44,6 @@ function Form({
     // we check that auto-complete did not enable users to type multiple words at once
     let typedWords = input.toLowerCase().split(" ");
     if (typedWords.length > 1) {
-      console.log("multiple words");
       // we get the first element of the word array
       const firstWord = typedWords.shift();
       if (firstWord === wordToCheck) {
@@ -67,10 +64,6 @@ function Form({
   ]);
 
   useEffect(() => {
-    // Input is cleared when typing test begins
-    // if (wordsTyped === 0) {
-    // setInput("");
-    // }
     // Set current word to type based on user's progress
     setWordToType(wordsList[wordsTyped]);
     /* Combine list of words before current word to type into one string. Same
