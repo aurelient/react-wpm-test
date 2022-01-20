@@ -5,6 +5,7 @@ import Timer from "./components/Timer";
 import StartButton from "./components/Start-Button";
 import Form from "./components/Form";
 import Logs from "./components/Logs";
+import Results from "./components/Results";
 
 const TEST_TIME = 30;
 
@@ -183,7 +184,11 @@ function App() {
           className="logs"
           onClick={function () {
             window.localStorage.clear();
-            setTrial(0);
+            if (trial === 0) setTrial(1);
+            else setTrial(0);
+            setKeystrokes(0);
+            setWordsTyped(0);
+            setErrors(0);
             window.localStorage.setItem("trialID", 0);
           }}
         >
@@ -198,15 +203,15 @@ function App() {
           <li>Accents must match</li>
         </ul>
         <StartButton startTest={startTest} />
+        <Results
+          trial={trial}
+          wordsTyped={wordsTyped}
+          keystrokes={keystrokes}
+          errors={errors}
+        ></Results>
         <div className="header">
-          Your typing speed was {Math.round((keystrokes * 2) / 5)} WPM, you
-          typed {wordsTyped} words, and {keystrokes} keystrokes, with {errors}{" "}
-          errors in 30 seconds.
+          <Logs trial={trial} />
         </div>
-        <div className="header">
-          <Logs />
-        </div>
-        <small style={{ color: "#aaa" }}>#{trial}</small>
       </div>
     );
   }

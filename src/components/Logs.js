@@ -1,6 +1,6 @@
 import React from "react";
 
-function Logs() {
+function Logs({ trial }) {
   function printRow([id, wpm, words, ks, errors]) {
     return (
       <tr className="form__table-row">
@@ -25,18 +25,21 @@ function Logs() {
   }
 
   return (
-    <table className="form__table">
-      <thead>
-        <tr>
-          <th>trial</th>
-          <th>wpm</th>
-          <th>words</th>
-          <th>keystrokes</th>
-          <th>errors</th>
-        </tr>
-      </thead>
-      <tbody>{printLocalStorage()}</tbody>
-    </table>
+    <>
+      <table className="form__table">
+        <thead>
+          <tr>
+            <th>trial</th>
+            <th>wpm</th>
+            <th>words</th>
+            <th>keystrokes</th>
+            <th>errors</th>
+          </tr>
+        </thead>
+        <tbody>{printLocalStorage()}</tbody>
+      </table>
+      <small style={{ color: "#aaa", opacity: "0.01" }}>#{trial}</small>
+    </>
   );
 }
 
