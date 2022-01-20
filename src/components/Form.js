@@ -42,6 +42,20 @@ function Form({
       incrementKeystrokes(wordToCheck.length);
       setErrorFlag(false);
     }
+
+    // we check that auto-complete did not enable users to type multiple words at once
+    let typedWords = input.toLowerCase().split(" ");
+    if (typedWords.length > 1) {
+      console.log("multiple words");
+      // we get the first element of the word array
+      const firstWord = typedWords.shift();
+      if (firstWord === wordToCheck) {
+        incrementWordsTyped();
+        setInput(typedWords.join(" "));
+        incrementKeystrokes(wordToCheck.length);
+        setErrorFlag(false);
+      }
+    }
   }, [
     input,
     errors,
@@ -55,7 +69,7 @@ function Form({
   useEffect(() => {
     // Input is cleared when typing test begins
     // if (wordsTyped === 0) {
-    setInput("");
+    // setInput("");
     // }
     // Set current word to type based on user's progress
     setWordToType(wordsList[wordsTyped]);

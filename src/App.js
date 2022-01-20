@@ -93,7 +93,6 @@ function App() {
     wordsListToSet = wordsListToSet.filter((word) => {
       return word !== "";
     });
-    console.log(wordsListToSet);
     setWordsList(wordsListToSet);
     setTime(TEST_TIME);
     setWordsTyped(0);
@@ -112,7 +111,6 @@ function App() {
 
   function incrementKeystrokes(ks) {
     setKeystrokes(keystrokes + ks);
-    console.log(keystrokes);
   }
 
   // Logic for starting test timer
