@@ -51,6 +51,14 @@ function Form({
         setInput(typedWords.join(" "));
         incrementKeystrokes(wordToCheck.length);
         setErrorFlag(false);
+      } else {
+        const secondWord = typedWords.shift();
+        if (secondWord === wordToCheck) {
+          incrementWordsTyped();
+          setInput(typedWords.join(" "));
+          incrementKeystrokes(wordToCheck.length);
+          setErrorFlag(false);
+        }
       }
     }
   }, [
