@@ -100,7 +100,7 @@ function Form({
           autoFocus
         ></input>
       </form>
-      <p className="header">
+      <p className="content">
         Words typed: {wordsTyped} — Errors: {errors}
       </p>
     </div>

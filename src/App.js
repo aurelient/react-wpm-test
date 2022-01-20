@@ -196,7 +196,7 @@ function App() {
         </button>
         <h1 className="header">Welcome to my typing speed app!</h1>
         {/* <div className="header">Rules:</div> */}
-        <ul className="header">
+        <ul className="content">
           <li>Type as many words as you can for 30 seconds</li>
           <li>No need to enter spaces between each word</li>
           <li>No need for letter casing to match</li>
@@ -209,7 +209,7 @@ function App() {
           keystrokes={keystrokes}
           errors={errors}
         ></Results>
-        <div className="header">
+        <div className="content">
           <Logs trial={trial} />
         </div>
       </div>
